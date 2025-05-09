@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Widget</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        table {
+            width: 220px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        td {
+            padding: 10px 5px;
+            font-size: 24px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Clock Table -->
+    <table id="clock">
+        <tr>
+            <td id="hours"></td>
+            <td>:</td>
+            <td id="minutes"></td>
+            <td>:</td>
+            <td id="seconds"></td>
+            <td id="am-pm"></td>
+        </tr>
+    </table>
+
+    <script>
+        function updateClock() {
+            const date = new Date();
+
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+
+            if (hours > 12) {
+                hours -= 12;
+            } else if (hours === 0) {
+                hours = 12; // Midnight case
+            }
+
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+            document.getElementById('am-pm').textContent = ampm;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
